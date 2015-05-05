@@ -52,7 +52,7 @@ public class PersonService {
 
     @RequestMapping(value = "profile", method = RequestMethod.GET)
     @ResponseBody
-    public final Userprofile getLoggedInPersonProfile(@RequestParam String day) {
+    public final Userprofile getLoggedInPersonProfile(Principal fvoPrincipal) {
        PersonService tvoPersonService = new PersonService();
         Person tvoPerson = tvoPersonService.getPersonByEmail(fvoPrincipal.getName());
         
@@ -115,7 +115,7 @@ public class PersonService {
 
         String tvsEncryptedNewPassword = tvoBCryptEncoder.encode(newpassword);
         tvoPerson.setPassword(tvsEncryptedNewPassword);
-        setPerson(id, tvoPerson);
+        setPerson(id, tvoPerson, fvoPrincipal);
 
     }
 
@@ -137,7 +137,7 @@ public class PersonService {
         Person tvoPerson = getPerson(id);
         if (!tvoPerson.getEmail().equals(fvoPrincipal.getName()))
             return null;
-        
+
         return (Person) SystemDataAccess.set(Person.class, id, p);
     }
 
