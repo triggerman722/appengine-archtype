@@ -13,12 +13,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PersonService {
@@ -57,7 +52,7 @@ public class PersonService {
 
     @RequestMapping(value = "profile", method = RequestMethod.GET)
     @ResponseBody
-    public final Userprofile getLoggedInPersonProfile(Principal fvoPrincipal) {
+    public final Userprofile getLoggedInPersonProfile(@RequestParam String day) {
        PersonService tvoPersonService = new PersonService();
         Person tvoPerson = tvoPersonService.getPersonByEmail(fvoPrincipal.getName());
         
@@ -98,12 +93,51 @@ public class PersonService {
         return pNew;
     }
 
+    @RequestMapping(value = "people/{id}/changepassword/", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void changePassword(@PathVariable("id") final Long id, @RequestParam String oldpassword, @RequestParam String newpassword, @RequestParam String confirmpassword, Principal fvoPrincipal ) {
+        //TODO: Validate new and confirm match
+        if (!newpassword.equals(confirmpassword))
+            return;
+        //TODO: confirm person exists
+        if (!doesExist(id))
+            return;
+        //TODO: confirm person is principal
+        Person tvoPerson = getPerson(id);
+        if (!tvoPerson.getEmail().equals(fvoPrincipal.getName()))
+            return;
+        //TODO: Validate old and person match
+
+        BCryptPasswordEncoder tvoBCryptEncoder = new BCryptPasswordEncoder();
+        String tvsEncryptedOldPassword = tvoBCryptEncoder.encode(oldpassword);
+        if (!tvoPerson.getPassword().equals(tvsEncryptedOldPassword))
+            return;
+
+        String tvsEncryptedNewPassword = tvoBCryptEncoder.encode(newpassword);
+        tvoPerson.setPassword(tvsEncryptedNewPassword);
+        setPerson(id, tvoPerson);
+
+    }
+
+    public boolean doesExist(Long personid){
+        Person tvoPerson = getPerson(personid);
+        if (tvoPerson!=null)
+            return true;
+        return false;
+    }
     //PUT 
     @RequestMapping(value = "people/{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public final Person setPerson(@PathVariable("id") final Long id, @RequestBody final Person p) {
+    public final Person setPerson(@PathVariable("id") final Long id, @RequestBody final Person p, Principal fvoPrincipal) {
 
+        if (!doesExist(id))
+            return null;
+
+        Person tvoPerson = getPerson(id);
+        if (!tvoPerson.getEmail().equals(fvoPrincipal.getName()))
+            return null;
+        
         return (Person) SystemDataAccess.set(Person.class, id, p);
     }
 
