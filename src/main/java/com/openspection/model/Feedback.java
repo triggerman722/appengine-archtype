@@ -22,8 +22,6 @@ public class Feedback {
     private Long authorid;
     private Long positive;
     private String description;
-    private Long prepoints;
-    private Long postpoints;
 
     public Long getId() {
         return id;
@@ -63,22 +61,6 @@ public class Feedback {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Long getPrepoints() {
-        return prepoints;
-    }
-
-    public void setPrepoints(Long prepoints) {
-        this.prepoints = prepoints;
-    }
-
-    public Long getPostpoints() {
-        return postpoints;
-    }
-
-    public void setPostpoints(Long postpoints) {
-        this.postpoints = postpoints;
     }
 
 }

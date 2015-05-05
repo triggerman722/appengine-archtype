@@ -15,20 +15,16 @@ import java.util.List;
 public class VoteService
 {
 
-	//GET
-
-	@RequestMapping( value = "votes",method = RequestMethod.GET )
-	@ResponseBody
-	public final List< Vote > getAllVotes()
-	{
-		return SystemDataAccess.getAll("select p from Vote p ");
-	}
+	// does it actually matter if I check first to see if the entity exists?
 
 	@RequestMapping( value = "votes/{id}",method = RequestMethod.GET )
 	@ResponseBody
-	public final Vote getVote( @PathVariable( "id" ) final Long id )
+	public final List<Vote> getVote( @PathVariable( "id" ) final Long id )
 	{
-		return (Vote) SystemDataAccess.get(Vote.class, id);
+		Object[][] tvoObject = new Object[1][2];
+		tvoObject[0][0] = "entityid";
+		tvoObject[0][1] = id;
+		return SystemDataAccess.getWithParams("select p from Vote p where p.entityid in (:entityid) ", tvoObject);
 	}
 
 	//POST
@@ -42,25 +38,5 @@ public class VoteService
 		return (Vote) SystemDataAccess.add(p);
 	}
 
-	//PUT 
-
-	@RequestMapping( value = "votes/{id}",method = RequestMethod.PUT )
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody	
-	public final Vote setVote( @PathVariable( "id" ) final Long id, @RequestBody final Vote p )
-	{
-		
-		p.setId(id);
-		return (Vote) SystemDataAccess.set(Vote.class, id, p);
-	}
-
-	//DELETE
-
-	@RequestMapping( value = "votes/{id}",method = RequestMethod.DELETE )
-	@ResponseStatus( HttpStatus.OK )
-	public final void deleteVote( @PathVariable( "id" ) final Long id )
-	{
-		SystemDataAccess.delete(Vote.class, id);
-	}
 
 }

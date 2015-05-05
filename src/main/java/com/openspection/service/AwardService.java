@@ -2,6 +2,7 @@ package com.openspection.service;
 
 
 import com.openspection.model.Award;
+import com.openspection.model.Like;
 import com.openspection.persistence.SystemDataAccess;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -14,20 +15,15 @@ import java.util.List;
 public class AwardService
 {
 
-	//GET
-
-	@RequestMapping( value = "awards",method = RequestMethod.GET )
-	@ResponseBody
-	public final List< Award > getAllAwards()
-	{
-		return SystemDataAccess.getAll("select p from Award p ");
-	}
-
+	// Get a list of awards that apply to a person.
 	@RequestMapping( value = "awards/{id}",method = RequestMethod.GET )
 	@ResponseBody
-	public final Award getAward( @PathVariable( "id" ) final Long id )
+	public final List<Award> getAwards( @PathVariable( "id" ) final Long id )
 	{
-		return (Award) SystemDataAccess.get(Award.class, id);
+		Object[][] tvoObject = new Object[1][2];
+		tvoObject[0][0] = "personid";
+		tvoObject[0][1] = id;
+		return SystemDataAccess.getWithParams("select p from Award p where p.personid in (:personid) ", tvoObject);
 	}
 
 	//POST
@@ -41,17 +37,7 @@ public class AwardService
 		return (Award) SystemDataAccess.add(p);
 	}
 
-	//PUT 
 
-	@RequestMapping( value = "awards/{id}",method = RequestMethod.PUT )
-	@ResponseStatus( HttpStatus.OK )
-	@ResponseBody	
-	public final Award setAward( @PathVariable( "id" ) final Long id, @RequestBody final Award p )
-	{
-		
-		p.setId(id);
-		return (Award) SystemDataAccess.set(Award.class, id, p);
-	}
 
 	//DELETE
 

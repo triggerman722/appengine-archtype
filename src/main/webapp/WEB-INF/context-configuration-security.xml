@@ -13,7 +13,7 @@
         <security:intercept-url pattern="/authentication-failure/*"  access="permitAll" />
         <security:intercept-url pattern="/manage/*" access="hasRole('ROLE_RIGHT_access_management_screens')" />
         <security:logout logout-success-url="/" invalidate-session="true"/>
-        <security:form-login login-processing-url="/dologin"  username-parameter="username" password-parameter="password" authentication-failure-url="/authentication-failure"/>
+        <security:form-login login-processing-url="/login"  username-parameter="username" password-parameter="password" authentication-failure-url="/authentication-failure"/>
         <csrf disabled="true"/>
     </security:http>
 

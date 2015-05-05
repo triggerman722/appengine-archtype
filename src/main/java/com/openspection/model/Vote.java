@@ -15,7 +15,7 @@ public class Vote  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long personid;
-    private Long postid;
+    private Long entityid;
     private boolean positive;
 
     public Long getId() {
@@ -34,12 +34,12 @@ public class Vote  implements Serializable {
         this.personid = personid;
     }
 
-    public Long getPostid() {
-        return postid;
+    public Long getEntityid() {
+        return entityid;
     }
 
-    public void setPostid(Long postid) {
-        this.postid = postid;
+    public void setEntityid(Long entityid) {
+        this.entityid = entityid;
     }
 
     public boolean isPositive() {
