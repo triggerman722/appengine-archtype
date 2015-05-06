@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.User;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by greg on 26/04/15.
@@ -40,7 +39,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new User(
                 tvoPerson.getEmail(),
                 tvoPerson.getPassword(),
-                tvoPerson.isEnabled(),
+                tvoPerson.getIsenabled(),
                 tvbAccountNonExpired,
                 tvbCredentialsNonExpired,
                 tvbAccountNonLocked,

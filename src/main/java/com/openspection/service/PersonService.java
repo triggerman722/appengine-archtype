@@ -10,6 +10,7 @@ import com.openspection.persistence.SystemDataAccess;
 import java.security.Principal;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -95,7 +96,18 @@ public class PersonService {
 
     @RequestMapping(value = "people/{id}/changepassword/", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public void changePassword(@PathVariable("id") final Long id, @RequestParam String oldpassword, @RequestParam String newpassword, @RequestParam String confirmpassword, Principal fvoPrincipal ) {
+    public void changePassword(@PathVariable("id") final Long id,
+                               @RequestParam String oldpassword,
+                               @RequestParam String newpassword,
+                               @RequestParam String confirmpassword,
+                               Principal fvoPrincipal ) {
+
+        if (newpassword == null)
+            return;
+        if (oldpassword == null)
+            return;
+        if (confirmpassword == null)
+            return;
         //TODO: Validate new and confirm match
         if (!newpassword.equals(confirmpassword))
             return;
@@ -109,13 +121,17 @@ public class PersonService {
         //TODO: Validate old and person match
 
         BCryptPasswordEncoder tvoBCryptEncoder = new BCryptPasswordEncoder();
-        String tvsEncryptedOldPassword = tvoBCryptEncoder.encode(oldpassword);
-        if (!tvoPerson.getPassword().equals(tvsEncryptedOldPassword))
+
+        if (!tvoBCryptEncoder.matches(oldpassword, tvoPerson.getPassword()))
             return;
 
         String tvsEncryptedNewPassword = tvoBCryptEncoder.encode(newpassword);
-        tvoPerson.setPassword(tvsEncryptedNewPassword);
-        setPerson(id, tvoPerson, fvoPrincipal);
+
+        Person tvoNewperson = new Person();
+        BeanUtils.copyProperties(tvoPerson, tvoNewperson);
+
+        tvoNewperson.setPassword(tvsEncryptedNewPassword);
+        setPerson(id, tvoNewperson, fvoPrincipal);
 
     }
 
@@ -134,6 +150,8 @@ public class PersonService {
         if (!doesExist(id))
             return null;
 
+        // Hmm...this confirms the caller is the Person
+        // but does mean you can't change your email addr.
         Person tvoPerson = getPerson(id);
         if (!tvoPerson.getEmail().equals(fvoPrincipal.getName()))
             return null;

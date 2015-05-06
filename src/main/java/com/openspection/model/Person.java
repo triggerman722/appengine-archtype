@@ -17,7 +17,7 @@ public class Person {
     private String name;
     private String password;
 
-    public boolean isEnabled() {
+    public boolean getIsenabled() {
         return isenabled;
     }
 
