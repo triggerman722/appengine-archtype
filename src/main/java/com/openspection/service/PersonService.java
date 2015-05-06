@@ -108,17 +108,16 @@ public class PersonService {
             return;
         if (confirmpassword == null)
             return;
-        //TODO: Validate new and confirm match
+
         if (!newpassword.equals(confirmpassword))
             return;
-        //TODO: confirm person exists
+
         if (!doesExist(id))
             return;
-        //TODO: confirm person is principal
+
         Person tvoPerson = getPerson(id);
         if (!tvoPerson.getEmail().equals(fvoPrincipal.getName()))
             return;
-        //TODO: Validate old and person match
 
         BCryptPasswordEncoder tvoBCryptEncoder = new BCryptPasswordEncoder();
 

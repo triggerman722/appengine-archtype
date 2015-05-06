@@ -1,0 +1,46 @@
+<h1>Openspections</h1>
+<hr>
+<!--
+<div class="col-sm-12 col-md-12" ng-repeat="openspection in openspections | orderBy:'email'">
+	<a href="#/openspections/{{openspection.id}}">
+		<img src="http://maps.googleapis.com/maps/api/staticmap?center={{openspection.latitude}},{{openspection.longitude}}&zoom=11&size=64x64&sensor=false">
+	</a>
+	<p class="lead col-md-11"> <a href="#/openspections/{{openspection.id}}">{{openspection.title}}</a></p>
+	<i class="col-md-1 glyphicon glyphicon-star"></i>
+	<p class="col-md-12">{{openspection.description}}</p>
+	<span><i class="glyphicon glyphicon-time"></i>{{openspection.duedate}}</span>
+	<span><i class="glyphicon glyphicon-user"></i>{{openspection.createdby}}</span>
+	<span><i class="glyphicon glyphicon-usd"></i>10</span>
+	<hr>
+</div>
+-->
+
+
+<!--
+<span class="col-sm-1 col-md-1" style="padding-left:0px">
+			<a href="#/openspections/{{openspection.id}}">
+				<img  src="http://maps.googleapis.com/maps/api/staticmap?center={{openspection.latitude}},{{openspection.longitude}}&zoom=11&size=64x64&sensor=false">
+			</a>
+</span>
+<span class="col-md-11 col-sm-11" style="padding:0px;margin:0px">
+			<h4><a href="#/openspections/{{openspection.id}}">{{openspection.title}}</a></h4>
+			{{openspection.description}}
+</span>
+-->
+
+<ul class="media-list">
+    <li class="media" ng-repeat="openspection in openspections | orderBy:'email'">
+
+        <a class="pull-left" href="#/openspections/{{openspection.id}}">
+            <img class="media-object"
+                 src="http://maps.googleapis.com/maps/api/staticmap?center={{openspection.latitude}},{{openspection.longitude}}&zoom=11&size=64x64&sensor=false">
+        </a>
+
+        <div class="media-body">
+            <h4 class="media-heading"><a href="#/openspections/{{openspection.id}}">{{openspection.title}}</a></h4>
+            {{openspection.description}}
+        </div>
+    </li>
+</ul>
+
+

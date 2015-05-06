@@ -1,0 +1,77 @@
+<h1>{{openspection.title}}</h1>
+<hr>
+<div class="col-md-1">
+    <i class="glyphicon glyphicon-upload"></i>
+
+    <h1>0</h1>
+    <i class="glyphicon glyphicon-download"></i>
+    <i class="glyphicon glyphicon-star-empty"></i>
+</div>
+<div class="col-md-7">
+    <p class="lead">{{openspection.description}}</p>
+</div>
+
+<div class="col-md-4">
+    <dl class="dl-horizontal">
+        <dt><i class="glyphicon glyphicon-calendar"></i> Created</dt>
+        <dd>{{openspection.datecreated}}</dd>
+        <dt><i class="glyphicon glyphicon-bell"></i> Expires</dt>
+        <dd>{{openspection.dateexpired}}</dd>
+        <dt><i class="glyphicon glyphicon-user"></i> Owner</dt>
+        <dd><a href="#/people/{{openspection.createdby}}">{{openspection.createdby}}</a></dd>
+    </dl>
+    <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
+        <i class="glyphicon glyphicon-bullhorn"></i> Answer
+    </button>
+
+
+</div>
+<div class="col-md-8">
+    <span class="label label-primary"><i class="glyphicon glyphicon-tag"></i> Bike</span><span
+        class="label label-primary"><i class="glyphicon glyphicon-tag"></i> School</span>
+</div>
+<div class="col-md-4">
+    <div id="googleDisplayMap" class="embed-responsive embed-responsive-4by3"></div>
+</div>
+
+<!-- NEW RESPONSE FORM -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Openspect!</h4>
+            </div>
+            <form class="form-horizontal" ng-submit="add()" id="forminput">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="inputTitle" class="col-sm-2 control-label">Description</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="add-title3" placeholder="A description"
+                                   ng-model="newOpenspection.description">
+                            <span id="helpBlock" class="help-block hidden-xs">The more detail you can provide about your request, the better the odds you'll get the results you want.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputLatitude" class="col-sm-2 control-label">Pictures</label>
+
+                        <div class="col-sm-10">
+
+                            <input type="file" class="form-control" id="add-title3" placeholder="A description"
+                                   ng-model="newOpenspection.dateexpired">
+                            <span id="helpBlock" class="help-block hidden-xs">The more points you award, the better people will compete to deliver results!</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save Draft</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

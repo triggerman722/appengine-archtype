@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="RhinodromeApp">
+<head>
+    <meta charset="utf-8">
+    <title>Openspection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Greg Martin">
+
+
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <link href="ref/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="ref/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/>
+
+    <link href="ref/openspection/css/main.css" rel="stylesheet">
+
+    <script src="ref/jquery/js/jquery-2.1.0.min.js"></script>
+
+
+</head>
+
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/openspections">Openspection</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar">
+            <form class="navbar-form navbar-left" role="search" ng-submit="find()" ng-controller="SearchCtrl">
+                <div class="right-inner-addon ">
+                    <i class="glyphicon glyphicon-search"></i>
+                    <input type="text" class="form-control" placeholder="Search" ng-model="query">
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right" ng-show="!authenticated">
+                <li><a href="#/login"><i class="glyphicon glyphicon-log-in"></i> Login</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" ng-show="authenticated">
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>
+                        {{personname}} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#/people/{{personid}}"><i class="glyphicon glyphicon-dashboard"></i> Profile</a>
+                        </li>
+                        <li><a href="#/people/{{personid}}/changepassword"><i class="glyphicon glyphicon-cog"></i> Change Password</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" ng-click="logout()" ng-controller="SecurityCtrl"><i
+                                class="glyphicon glyphicon-log-out"></i> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div ng-show="authenticated" class="col-md-2 col-lg-2 hidden-xs hidden-sm alert-info">
+            <div class="list-group">
+                <a class="list-group-item" href="#/openspections"><i class="glyphicon glyphicon-dashboard"></i> Jobs <i
+                        class="pull-right glyphicon glyphicon-chevron-right"></i></a>
+                <a class="list-group-item" href="#/applications/people/{{personid}}"><i
+                        class="glyphicon glyphicon-user"></i> Applications <i
+                        class="pull-right glyphicon glyphicon-chevron-right"></i></a>
+                <a class="list-group-item" href="#/openspections"><i class="glyphicon glyphicon-anchor"></i> Browse <i
+                        class="pull-right glyphicon glyphicon-chevron-right"></i></a>
+
+            </div>
+        </div>
+        <div ng-show="authenticated" class="col-sm-1 col-xs-1 hidden-md hidden-lg">
+            <div class="list-group">
+                <a class="list-group-item" href="#/openspections"><i class="glyphicon glyphicon-dashboard"></i></a>
+                <a class="list-group-item" href="#/applications/people/{{personid}}"><i
+                        class="glyphicon glyphicon-user"></i></a>
+                <a class="list-group-item" href="#/openspections"><i class="glyphicon glyphicon-anchor"></i></a>
+
+            </div>
+        </div>
+        <div ng-class="{'col-sm-11 col-md-10 col-xs-11 main shadow-left':authenticated, 'col-sm-12 col-xs-12 main':!authenticated }"
+             ng-view>
+        </div>
+    </div>
+</div>
+
+<script src="ref/angularjs/bin/angular.min.js"></script>
+<script src="ref/angularjs/bin/angular-resource.min.js"></script>
+<script src="ref/bootstrap/js/bootstrap.min.js"></script>
+<script src="lib/common/app.js"></script>
+
+<script src="lib/Posts/controllers/postscontroller.js"></script>
+<script src="lib/Security/controllers/securitycontroller.js"></script>
+
+<script src="lib/People/controllers/peoplecontroller.js"></script>
+<script src="lib/Search/controllers/searchcontroller.js"></script>
+
+
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+</body>
+</html>

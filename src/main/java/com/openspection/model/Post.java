@@ -46,7 +46,7 @@ public class Post implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date datecreated;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date duedate;
+    private Date dateexpired;
 
     public Long getId() {
         return id;
@@ -112,12 +112,12 @@ public class Post implements Serializable {
         this.datecreated = datecreated;
     }
 
-    public Date getDuedate() {
-        return duedate;
+    public Date getDateexpired() {
+        return dateexpired;
     }
 
-    public void setDuedate(Date duedate) {
-        this.duedate = duedate;
+    public void setDateexpired(Date dateexpired) {
+        this.dateexpired = dateexpired;
     }
 
 	public boolean getRequestPhotos() {
