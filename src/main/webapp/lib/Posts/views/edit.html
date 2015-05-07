@@ -1,55 +1,55 @@
 <form class="form-horizontal" ng-submit="save()">
-    <input type="hidden" ng-model="openspection.id"/>
+    <input type="hidden" ng-model="post.id"/>
     <fieldset>
-        <legend>Edit a person</legend>
+        <legend>Edit a Post</legend>
         <div class="control-group">
             <label class="control-label" for="edit-title">Title</label>
 
             <div class="controls">
-                <input name="title" id="edit-title" type="text" placeholder="A Title" ng-model="openspection.title"/>
+                <input name="title" id="edit-title" type="text" placeholder="A Title" ng-model="post.title"/>
             </div>
             <label class="control-label" for="edit-description">Description</label>
 
             <div class="controls">
                 <input name="description" id="edit-description" type="text"
-                       placeholder="Add a description for this Openspection" ng-model="openspection.description"
+                       placeholder="Add a description for this Post" ng-model="post.description"
                        required/>
             </div>
             <label class="control-label" for="add-latitude">Latitude</label>
 
             <div class="controls">
                 <input id="add-latitude" name="latitude" type="text" placeholder="A latitude"
-                       ng-model="openspection.latitude"/>
+                       ng-model="post.latitude"/>
             </div>
             <label class="control-label" for="add-longitude">Longitude</label>
 
             <div class="controls">
                 <input id="add-longitude" name="longitude" type="text" placeholder="A longitude"
-                       ng-model="openspection.longitude"/>
+                       ng-model="post.longitude"/>
             </div>
             <label class="control-label" for="add-radius">Radius</label>
 
             <div class="controls">
                 <input id="add-radius" name="radius" type="text" placeholder="A radius"
-                       ng-model="openspection.radius"/>
+                       ng-model="post.radius"/>
             </div>
             <label class="control-label" for="add-created">Created</label>
 
             <div class="controls">
                 <input id="add-created" name="created" type="text" placeholder="A title"
-                       ng-model="openspection.datecreated"/>
+                       ng-model="post.datecreated"/>
             </div>
             <label class="control-label" for="add-dateexpired">Due Date</label>
 
             <div class="controls">
                 <input id="add-dateexpired" name="dateexpired" type="text" placeholder="Due date"
-                       ng-model="openspection.dateexpired"/>
+                       ng-model="post.dateexpired"/>
             </div>
             <label class="control-label" for="add-requiresCamera">Requires a camera?</label>
 
             <div class="controls">
                 <input id="add-requiresCamera" name="requiresCamera" type="checkbox" placeholder="A radius"
-                       ng-model="openspection.requiresCamera"/>
+                       ng-model="post.requiresCamera"/>
             </div>
 
         </div>

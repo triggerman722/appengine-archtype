@@ -9,7 +9,7 @@ angular.module('SearchModule').factory('SearchResource', function($resource) {
 angular.module('SearchModule').controller('SearchCtrl', function($scope, $routeParams, $location, SearchResource, $http) {
 		if ($routeParams.query)
 		{
-            $scope.openspections = SearchResource.lookup({query: $routeParams.query});			
+            $scope.posts = SearchResource.lookup({query: $routeParams.query});
 		}
 		$scope.find = function() {
 			$location.path('/search/'+$scope.query);			

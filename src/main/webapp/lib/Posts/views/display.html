@@ -1,4 +1,4 @@
-<h1>{{openspection.title}}</h1>
+<h1>{{post.title}}</h1>
 <hr>
 <div class="col-md-1">
     <i class="glyphicon glyphicon-upload"></i>
@@ -8,17 +8,17 @@
     <i class="glyphicon glyphicon-star-empty"></i>
 </div>
 <div class="col-md-7">
-    <p class="lead">{{openspection.description}}</p>
+    <p class="lead">{{post.description}}</p>
 </div>
 
 <div class="col-md-4">
     <dl class="dl-horizontal">
         <dt><i class="glyphicon glyphicon-calendar"></i> Created</dt>
-        <dd>{{openspection.datecreated}}</dd>
+        <dd>{{post.datecreated}}</dd>
         <dt><i class="glyphicon glyphicon-bell"></i> Expires</dt>
-        <dd>{{openspection.dateexpired}}</dd>
+        <dd>{{post.dateexpired}}</dd>
         <dt><i class="glyphicon glyphicon-user"></i> Owner</dt>
-        <dd><a href="#/people/{{openspection.createdby}}">{{openspection.createdby}}</a></dd>
+        <dd><a href="#/people/{{post.createdby}}">{{post.createdby}}</a></dd>
     </dl>
     <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
         <i class="glyphicon glyphicon-bullhorn"></i> Answer
@@ -41,35 +41,24 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Openspect!</h4>
+                <h4 class="modal-title" id="myModalLabel">Add a Comment</h4>
             </div>
-            <form class="form-horizontal" ng-submit="add()" id="forminput">
+            <form class="form-horizontal" ng-submit="addComment({{post.id}})" id="forminput">
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label for="inputTitle" class="col-sm-2 control-label">Description</label>
+                        <label for="inputTitle" class="col-sm-2 control-label">Comment</label>
 
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="add-title3" placeholder="A description"
-                                   ng-model="newOpenspection.description">
+                                   ng-model="newComment.comment">
                             <span id="helpBlock" class="help-block hidden-xs">The more detail you can provide about your request, the better the odds you'll get the results you want.</span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputLatitude" class="col-sm-2 control-label">Pictures</label>
-
-                        <div class="col-sm-10">
-
-                            <input type="file" class="form-control" id="add-title3" placeholder="A description"
-                                   ng-model="newOpenspection.dateexpired">
-                            <span id="helpBlock" class="help-block hidden-xs">The more points you award, the better people will compete to deliver results!</span>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save Draft</button>
+                    <button type="submit" class="btn btn-primary">Add Comment</button>
                 </div>
             </form>
         </div>

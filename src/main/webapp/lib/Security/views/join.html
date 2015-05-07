@@ -1,6 +1,4 @@
 <div class="col-sm-12 col-md-12">
-    <div class="alert alert-danger" role="alert" ng-show="authentication_error">Unable to locate those credentials.
-    </div>
     <form class="form-horizontal" ng-submit="join()">
         <fieldset>
             <legend>Join</legend>
@@ -16,7 +14,7 @@
                 <label class="control-label" for="add-username">Username</label>
 
                 <div class="controls">
-                    <input id="add-username" name="email" type="email" placeholder="g@martin.com" required
+                    <input id="add-username" name="email" type="email" placeholder="username@example.com" required
                            ng-model="newPerson.email"/>
                 </div>
             </div>
@@ -31,7 +29,7 @@
             </div>
 
             <div class="form-actions">
-                <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> Add</button>
+                <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> Join</button>
             </div>
         </fieldset>
     </form>
