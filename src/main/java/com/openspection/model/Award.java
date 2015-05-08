@@ -5,10 +5,8 @@
  */
 package com.openspection.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  *
@@ -25,6 +23,9 @@ public class Award {
     private String description;
 
     private Long personid;
+
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date datecreated;
 
     public Long getId() {
         return id;
@@ -64,5 +65,13 @@ public class Award {
 
     public void setPersonid(Long personid) {
         this.personid = personid;
+    }
+
+    public Date getDatecreated() {
+        return datecreated;
+    }
+
+    public void setDatecreated(Date datecreated) {
+        this.datecreated = datecreated;
     }
 }

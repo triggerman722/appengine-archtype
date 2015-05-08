@@ -1,5 +1,6 @@
 package com.openspection.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -41,6 +42,7 @@ public class CommentService
 	{
 		
 		p.setId(null);
+		p.setDatecreated(new Date());
 		return (Comment) SystemDataAccess.add(p);
 	}
 

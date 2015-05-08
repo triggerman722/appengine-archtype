@@ -23,6 +23,9 @@ public class Follow implements Serializable {
     private Long createdby; //I am a follower
     private Long entityid; // This is what I am following
 
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date datecreated;
+
     public Long getId() {
         return id;
     }
@@ -48,4 +51,11 @@ public class Follow implements Serializable {
     }
 
 
+    public Date getDatecreated() {
+        return datecreated;
+    }
+
+    public void setDatecreated(Date datecreated) {
+        this.datecreated = datecreated;
+    }
 }

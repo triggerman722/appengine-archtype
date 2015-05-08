@@ -30,6 +30,11 @@
     <span class="label label-primary"><i class="glyphicon glyphicon-tag"></i> Bike</span><span
         class="label label-primary"><i class="glyphicon glyphicon-tag"></i> School</span>
 </div>
+<div class="col-md-8">
+    <a href="#" class="btn btn-info" ng-click="liketoggle({{post.id}})" ng-controller="PostsCtrl">
+        <i ng-class="{'glyphicon glyphicon-thumbs-up':ilikethis, 'glyphicon glyphicon-thumbs-down':!ilikethis }"></i>
+    </a>
+</div>
 <div class="col-md-4">
     <div id="googleDisplayMap" class="embed-responsive embed-responsive-4by3"></div>
 </div>
@@ -58,7 +63,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add Comment</button>
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal">Add Comment</button>
                 </div>
             </form>
         </div>

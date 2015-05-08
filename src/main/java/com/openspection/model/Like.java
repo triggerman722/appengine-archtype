@@ -21,8 +21,10 @@ public class Like implements Serializable {
     private Long id;
     
     private Long createdby; //user id
-    private String like;
-	private Long entityid; // the thing the like applies to.	
+    private Long entityid; // the thing the like applies to.
+
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date datecreated;
 
     public Long getId() {
         return id;
@@ -40,14 +42,6 @@ public class Like implements Serializable {
         this.createdby = createdby;
     }
 
-    public String getLike() {
-        return like;
-    }
-
-    public void setLike(String like) {
-        this.like = like;
-    }
-
     public Long getEntityid() {
         return entityid;
     }
@@ -57,4 +51,11 @@ public class Like implements Serializable {
     }
 
 
+    public Date getDatecreated() {
+        return datecreated;
+    }
+
+    public void setDatecreated(Date datecreated) {
+        this.datecreated = datecreated;
+    }
 }

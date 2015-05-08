@@ -1,10 +1,8 @@
 package com.openspection.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by greg on 21/04/15.
@@ -17,6 +15,9 @@ public class Vote  implements Serializable {
     private Long personid;
     private Long entityid;
     private boolean positive;
+
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date datecreated;
 
     public Long getId() {
         return id;
@@ -48,5 +49,13 @@ public class Vote  implements Serializable {
 
     public void setPositive(boolean positive) {
         this.positive = positive;
+    }
+
+    public Date getDatecreated() {
+        return datecreated;
+    }
+
+    public void setDatecreated(Date datecreated) {
+        this.datecreated = datecreated;
     }
 }

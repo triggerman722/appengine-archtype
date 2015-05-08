@@ -41,7 +41,14 @@ angular.module('PostsModule').controller('PostsCtrl', function($scope, $routePar
 				var marker = new google.maps.Marker({
                 	position: myLatlng,
                 	map: map
-            	}); 
+            	});
+            	LikeResource.get({id:$routeParams.id}, function(response){
+            	    //http 200
+            	    $scope.ilikethis = true;
+            	}, function (response){
+            	    //http 404
+            	    $scope.ilikethis = false;
+            	});
 			});
         }
         if ($location.path() === '/posts')
@@ -100,7 +107,7 @@ angular.module('PostsModule').controller('PostsCtrl', function($scope, $routePar
 
         //Comment handling
 
-        Scope.addComment = function(id)
+        $scope.addComment = function(id)
         {
             $scope.newComment.entityid = id;
             CommentResource.add({}, $scope.newComment, function()
@@ -108,7 +115,7 @@ angular.module('PostsModule').controller('PostsCtrl', function($scope, $routePar
                 $location.path('/posts/'+id);
             });
         };
-        Scope.deleteComment = function(id)
+        $scope.deleteComment = function(id)
         {
             if (!confirm('Confirm delete'))
             {
@@ -129,25 +136,17 @@ angular.module('PostsModule').controller('PostsCtrl', function($scope, $routePar
                 $location.path('/posts');
             });
         };
-        // Like mgmt
-        Scope.addLike = function(id)
+
+
+        $scope.liketoggle = function(id)
         {
-            $scope.newLike.entityid = id;
-            LikeResource.add({}, $scope.newLike, function()
-            {
-                $location.path('/posts/'+id);
-            });
-        };
-        Scope.deleteLike = function(id)
-        {
-            if (!confirm('Confirm unlike'))
-            {
-                return;
+            if ($scope.ilikethis) {
+                LikeResource.remove({id:id});
+            } else {
+                var thisLike = {"entityid": id};
+                LikeResource.add({}, thisLike);
             }
-            LikeResource.remove({id: id}, {}, function(data)
-            {
-                $location.path('/posts');
-            });
+            $scope.ilikethis = !$scope.ilikethis;
         };
 		
 });

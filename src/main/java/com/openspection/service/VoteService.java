@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -35,6 +36,7 @@ public class VoteService
 	public final Vote addVote( @RequestBody final Vote p , HttpServletRequest request)
 	{
 		p.setId(null);
+		p.setDatecreated(new Date());
 		return (Vote) SystemDataAccess.add(p);
 	}
 

@@ -8,6 +8,8 @@ package com.openspection.model;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import java.util.Date;
 
 /**
  *
@@ -22,6 +24,9 @@ public class Feedback {
     private Long authorid;
     private Long positive;
     private String description;
+
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date datecreated;
 
     public Long getId() {
         return id;
@@ -63,4 +68,11 @@ public class Feedback {
         this.description = description;
     }
 
+    public Date getDatecreated() {
+        return datecreated;
+    }
+
+    public void setDatecreated(Date datecreated) {
+        this.datecreated = datecreated;
+    }
 }
