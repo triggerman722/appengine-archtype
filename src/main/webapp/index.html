@@ -2,13 +2,13 @@
 <html lang="en" ng-app="RhinodromeApp">
 <head>
     <meta charset="utf-8">
-    <title>Openspection</title>
+    <title>Archetype</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Greg Martin">
 
 
-    <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+   <!-- <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>-->
     <link href="ref/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="ref/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/>
 
@@ -20,7 +20,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
@@ -29,7 +29,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#/openspections">Openspection</a>
+            <a class="navbar-brand" href="#/posts">Archetype</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar">
             <form class="navbar-form navbar-left" role="search" ng-submit="find()" ng-controller="SearchCtrl">
@@ -64,29 +64,8 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div ng-show="authenticated" class="col-md-2 col-lg-2 hidden-xs hidden-sm alert-info">
-            <div class="list-group">
-                <a class="list-group-item" href="#/openspections"><i class="glyphicon glyphicon-dashboard"></i> Jobs <i
-                        class="pull-right glyphicon glyphicon-chevron-right"></i></a>
-                <a class="list-group-item" href="#/applications/people/{{personid}}"><i
-                        class="glyphicon glyphicon-user"></i> Applications <i
-                        class="pull-right glyphicon glyphicon-chevron-right"></i></a>
-                <a class="list-group-item" href="#/openspections"><i class="glyphicon glyphicon-anchor"></i> Browse <i
-                        class="pull-right glyphicon glyphicon-chevron-right"></i></a>
 
-            </div>
-        </div>
-        <div ng-show="authenticated" class="col-sm-1 col-xs-1 hidden-md hidden-lg">
-            <div class="list-group">
-                <a class="list-group-item" href="#/openspections"><i class="glyphicon glyphicon-dashboard"></i></a>
-                <a class="list-group-item" href="#/applications/people/{{personid}}"><i
-                        class="glyphicon glyphicon-user"></i></a>
-                <a class="list-group-item" href="#/openspections"><i class="glyphicon glyphicon-anchor"></i></a>
-
-            </div>
-        </div>
-        <div ng-class="{'col-sm-11 col-md-10 col-xs-11 main shadow-left':authenticated, 'col-sm-12 col-xs-12 main':!authenticated }"
-             ng-view>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2  main" ng-view>
         </div>
     </div>
 </div>
@@ -103,6 +82,6 @@
 <script src="lib/Search/controllers/searchcontroller.js"></script>
 
 
-<script src="http://maps.googleapis.com/maps/api/js"></script>
+
 </body>
 </html>

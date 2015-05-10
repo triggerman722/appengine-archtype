@@ -1,7 +1,7 @@
 angular.module('SearchModule', ['ngResource']);
 
 angular.module('SearchModule').factory('SearchResource', function($resource) {
-			return $resource('/search/:query', {}, {
+			return $resource('/api/search/:query', {}, {
 				lookup: {method: 'GET', isArray: true}
 			});
 		});

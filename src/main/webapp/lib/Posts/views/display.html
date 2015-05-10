@@ -31,12 +31,12 @@
         class="label label-primary"><i class="glyphicon glyphicon-tag"></i> School</span>
 </div>
 <div class="col-md-8">
-    <a href="#" class="btn btn-info" ng-click="liketoggle({{post.id}})" ng-controller="PostsCtrl">
-        <i ng-class="{'glyphicon glyphicon-thumbs-up':ilikethis, 'glyphicon glyphicon-thumbs-down':!ilikethis }"></i>
+    <a href="#" class="btn btn-info" ng-click="liketoggle(post.id)">
+        <i ng-class="{'glyphicon glyphicon-thumbs-down':ilikethis, 'glyphicon glyphicon-thumbs-up':!ilikethis }"></i>
     </a>
 </div>
 <div class="col-md-4">
-    <div id="googleDisplayMap" class="embed-responsive embed-responsive-4by3"></div>
+
 </div>
 
 <!-- NEW RESPONSE FORM -->

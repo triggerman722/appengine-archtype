@@ -1,7 +1,7 @@
 angular.module('PeopleModule', ['ngResource']);
 
 angular.module('PeopleModule').factory('PeopleResource', function($resource) {
-			return $resource('/people/:id', {}, {
+			return $resource('/api/people/:id', {}, {
 				query: {method: 'GET', isArray: true},
 				get: {method: 'GET'},
 				remove: {method: 'DELETE'},
@@ -10,12 +10,12 @@ angular.module('PeopleModule').factory('PeopleResource', function($resource) {
 			});
 		});
 angular.module('PeopleModule').factory('ChangepasswordResource', function($resource) {
-			return $resource('/people/:id/changepassword', {}, {
-				changepassword: {method: 'POST'}
+			return $resource('/api/people/:id/changepassword/', {id:'@id'}, {
+				changepassword: {method: 'POST', params:{oldpassword:'@oldpassword',newpassword:'@newpassword',confirmpassword:'@confirmpassword'}}
 			});
 		});
 angular.module('PeopleModule').factory('ProfileResource', function($resource) {
-    return $resource('profile/', {}, {
+    return $resource('/api/profile/', {}, {
         get: {method: 'GET'}
     });
 });                
@@ -50,7 +50,8 @@ angular.module('PeopleModule').controller('PeopleCtrl', function($scope, $routeP
         });
     };
     $scope.changepassword = function() {
-       ChangepasswordResource.changepassword({id: $scope.person.id, oldpassword:$scope.ChangePassword.oldpassword, newpassword:$scope.ChangePassword.newpassword, confirmpassword:$scope.ChangePassword.confirmpassword}, function(data) {
+       ChangepasswordResource.changepassword({id: $routeParams.id, oldpassword:$scope.ChangePassword.oldpassword, newpassword:$scope.ChangePassword.newpassword, confirmpassword:$scope.ChangePassword.confirmpassword}, function(data) {
+
            $location.path('/people');
        });
     };

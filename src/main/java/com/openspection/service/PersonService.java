@@ -94,7 +94,7 @@ public class PersonService {
         return pNew;
     }
 
-    @RequestMapping(value = "people/{id}/changepassword/", method = RequestMethod.POST)
+    @RequestMapping(value = "people/{id}/changepassword", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void changePassword(@PathVariable("id") final Long id,
                                @RequestParam String oldpassword,

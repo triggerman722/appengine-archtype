@@ -1,7 +1,7 @@
 angular.module('PostsModule', ['ngResource']);
 
 angular.module('PostsModule').factory('PostResource', function($resource) {
-			return $resource('/posts/:id', {}, {
+			return $resource('/api/posts/:id', {}, {
 				query: {method: 'GET', isArray: true},
 				get: {method: 'GET'},
 				remove: {method: 'DELETE'},
@@ -10,7 +10,7 @@ angular.module('PostsModule').factory('PostResource', function($resource) {
 			});
 		});
 angular.module('PostsModule').factory('CommentResource', function($resource) {
-			return $resource('/comments/:id', {}, {
+			return $resource('/api/comments/:id', {}, {
 				query: {method: 'GET', isArray: true},
 				remove: {method: 'DELETE'},
 				edit: {method: 'PUT'},
@@ -19,7 +19,7 @@ angular.module('PostsModule').factory('CommentResource', function($resource) {
 		});
 
 angular.module('PostsModule').factory('LikeResource', function($resource) {
-			return $resource('/likes/:id', {}, {
+			return $resource('/api/likes/:id', {}, {
 				query: {method: 'GET', isArray: true},
 				remove: {method: 'DELETE'},
 				add: {method: 'POST'}
@@ -31,17 +31,7 @@ angular.module('PostsModule').controller('PostsCtrl', function($scope, $routePar
         if ($routeParams.id && $routeParams.id!=null)
         {
             $scope.post = PostResource.get({id: $routeParams.id}, function(response){
-				var myLatlng = new google.maps.LatLng(response.latitude,response.longitude);
-				var mapProp = {
-					center: myLatlng,
-					zoom:5,
-					mapTypeId:google.maps.MapTypeId.ROADMAP
-				};
-				var map=new google.maps.Map(document.getElementById("googleDisplayMap"),mapProp);				
-				var marker = new google.maps.Marker({
-                	position: myLatlng,
-                	map: map
-            	});
+
             	LikeResource.get({id:$routeParams.id}, function(response){
             	    //http 200
             	    $scope.ilikethis = true;
@@ -57,20 +47,7 @@ angular.module('PostsModule').controller('PostsCtrl', function($scope, $routePar
         }
 		if ($location.path()=== '/posts/add')
 		{
-			var mapProp = {
-				center:new google.maps.LatLng(51.508742,-0.120850),
-				zoom:5,
-				mapTypeId:google.maps.MapTypeId.ROADMAP
-			};
-			var map=new google.maps.Map(document.getElementById("googleAddMap"),mapProp);
-			google.maps.event.addListener(map, 'click', function(event){
-				$scope.latitude = event.latLng.lat();
-				$scope.longitude = event.latLng.lng();
-				var marker = new google.maps.Marker({
-                	position: event.latLng, 
-                	map: map
-            	});       
-			});
+
 		}
 
         $scope.add = function()

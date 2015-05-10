@@ -1,25 +1,27 @@
 angular.module('SecurityModule', ['ngResource']);
 
 angular.module('SecurityModule').factory('SecurityResource', function($resource) {
-    return $resource('/login/', {}, {
+    return $resource('/api/login/', {}, {
         signin: {method: 'POST', params:{username:'@username',password:'@password'}}
     });
 });
 
 angular.module('SecurityModule').factory('JoinResource', function($resource) {
-    return $resource('/join/', {}, {
+    return $resource('/api/join/', {}, {
         joinup: {method: 'POST'}
     });
 });
 
 angular.module('SecurityModule').factory('LogoutResource', function($resource) {
-    return $resource('/logout/', {}, {
+    return $resource('/api/logout/', {}, {
         signout: {method: 'GET'}
     });
 });
 
 
-angular.module('SecurityModule').controller('SecurityCtrl', function($rootScope, $scope, $window, $routeParams, $location, JoinResource, SecurityResource, LogoutResource, $http, PeopleResource) {
+angular.module('SecurityModule').controller('SecurityCtrl', function($rootScope, $scope, $window,
+                    $routeParams, $location, JoinResource, SecurityResource,
+                    LogoutResource, $http, PeopleResource, ProfileResource) {
     
 
 	if ($location.path() == '/login') {
@@ -39,9 +41,11 @@ angular.module('SecurityModule').controller('SecurityCtrl', function($rootScope,
 			$window.localStorage.removeItem('authentication_error');
             $window.localStorage.setItem('authenticated', true);
             //TODO: Call /profile...the below will not work because the response will not have a personid
-            PeopleResource.get({id: data.personId}, function success(person) {
-		        $window.localStorage.setItem('personid', person.id);
-		        $window.localStorage.setItem('personname', person.name);
+            ProfileResource.get({}, function success(profile) {
+                $window.localStorage.setItem('personid', profile.id_str);
+            	$window.localStorage.setItem('personname', profile.name);
+            	$rootScope.personid = $window.localStorage.getItem('personid');
+                $rootScope.personname = $window.localStorage.getItem('personname');
             });
             
             
