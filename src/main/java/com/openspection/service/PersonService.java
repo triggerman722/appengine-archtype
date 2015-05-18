@@ -1,6 +1,7 @@
 package com.openspection.service;
 
 
+import com.openspection.mail.JoinMail;
 import com.openspection.model.Person;
 import com.openspection.model.Role;
 
@@ -11,6 +12,7 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -54,17 +56,17 @@ public class PersonService {
     @RequestMapping(value = "profile", method = RequestMethod.GET)
     @ResponseBody
     public final Userprofile getLoggedInPersonProfile(Principal fvoPrincipal) {
-       PersonService tvoPersonService = new PersonService();
-        Person tvoPerson = tvoPersonService.getPersonByEmail(fvoPrincipal.getName());
+
+        Person tvoPerson = getPersonByEmail(fvoPrincipal.getName());
         
         return (Userprofile) SystemDataAccess.get(Userprofile.class, tvoPerson.getId().toString());
     }
 
     //POST
-    @RequestMapping(value = "people", method = RequestMethod.POST)
+    @RequestMapping(value = "join", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public final Person addPerson(@RequestBody final Person p) {
+    public final Person addPerson(@RequestBody final Person p, JoinMail joinMail) {
 	
         Person tvoReturn = getPersonByEmail(p.getEmail());
 
@@ -91,8 +93,20 @@ public class PersonService {
         upNew.setName(pNew.getName());
         upNew.setReputation(1L);
         SystemDataAccess.add(upNew);
+
+        try {
+
+
+
+            joinMail.sendMail("no-reply@archive.com", "gemartin@gmail.com", "Welcome to hell", "dsfsff");
+        }
+        catch (Exception e){
+
+        }
         return pNew;
     }
+
+    public void
 
     @RequestMapping(value = "people/{id}/changepassword", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
@@ -164,4 +178,6 @@ public class PersonService {
     public final void deletePerson(@PathVariable("id") final Long id) {
         SystemDataAccess.delete(Person.class, id);
     }
+
+
 }

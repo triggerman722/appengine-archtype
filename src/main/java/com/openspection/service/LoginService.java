@@ -17,17 +17,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class LoginService {
 
-   
-    //GET
-    @RequestMapping(value = "join", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
-    public final Person getJoin(@RequestBody final Person p, HttpServletResponse response) {
-        PersonService pSrv = new PersonService();
-        Person ppNew = pSrv.addPerson(p);
-        response.setStatus(HttpServletResponse.SC_CREATED);
-        return ppNew;
-    }
 
     @RequestMapping(value="authentication-failure", method = RequestMethod.GET)
     public ResponseEntity<String> apiAuthenticationFailure() {
