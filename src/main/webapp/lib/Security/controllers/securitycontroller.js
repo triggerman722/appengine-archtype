@@ -7,7 +7,7 @@ angular.module('SecurityModule').factory('SecurityResource', function($resource)
 });
 
 angular.module('SecurityModule').factory('JoinResource', function($resource) {
-    return $resource('/api/join/', {}, {
+    return $resource('/join/', {}, {
         joinup: {method: 'POST'}
     });
 });

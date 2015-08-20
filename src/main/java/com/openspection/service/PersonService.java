@@ -106,7 +106,6 @@ public class PersonService {
         return pNew;
     }
 
-    public void
 
     @RequestMapping(value = "people/{id}/changepassword", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
